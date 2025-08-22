@@ -41,6 +41,26 @@ sections.forEach((section, index) => {
     });
     index || tween.progress(1); // the first tween should be at its end (already faded/scaled in)
 });
+// helper function that lets us define a section in a timeline that spans between two times (start/end) and lets us add onEnter/onLeave/onEnterBack/onLeaveBack callbacks
+function addSectionCallbacks(timeline, { start, end, param, onEnter, onLeave, onEnterBack, onLeaveBack }) {
+    let trackDirection = animation => { // just adds a "direction" property to the animation that tracks the moment-by-moment playback direction (1 = forward, -1 = backward)
+        let onUpdate = animation.eventCallback("onUpdate"), // in case it already has an onUpdate
+            prevTime = animation.time();
+        animation.direction = animation.reversed() ? -1 : 1;
+        animation.eventCallback("onUpdate", () => {
+            let time = animation.time();
+            if (prevTime !== time) {
+                animation.direction = time < prevTime ? -1 : 1;
+                prevTime = time;
+            }
+            onUpdate && onUpdate.call(animation);
+        });
+    },
+        empty = v => v; // in case one of the callbacks isn't defined
+    timeline.direction || trackDirection(timeline); // make sure direction tracking is enabled on the timeline
+    start >= 0 && timeline.add(() => ((timeline.direction < 0 ? onLeaveBack : onEnter) || empty)(param), start);
+    end <= timeline.duration() && timeline.add(() => ((timeline.direction < 0 ? onEnterBack : onLeave) || empty)(param), end);
+}
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
   // Rotate element-1 clockwise, element-2 counterclockwise
