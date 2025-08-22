@@ -67,15 +67,3 @@ function addSectionCallbacks(timeline, { start, end, param, onEnter, onLeave, on
     end <= timeline.duration() && timeline.add(() => ((timeline.direction < 0 ? onEnterBack : onLeave) || empty)(param), end);
 }
 
-function randomizeElements() {
-  for (let i = 1; i <= 6; i++) {
-    const el = document.getElementById(`element-${i}`);
-    if (el) {
-      // Generate a random top position between 10% and 90%
-      const randomTop = Math.random() * 80 + 10;
-      el.style.top = `${randomTop}%`;
-    }
-  }
-}
-// Move elements every 1 second
-setInterval(randomizeElements, 1000);
