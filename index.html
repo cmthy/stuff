@@ -25,7 +25,7 @@
 
 </head>
 
-<body>
+<body id="grain-overlay">
     <img id="element-1" src="star.svg" />
     <img id="element-2" src="yellow-banana.svg">
     <img id="element-3" src="star-2.svg" />
@@ -56,6 +56,18 @@
     <script src="stuff.js"></script>
     <script>
         ScrollReveal().reveal('.headline');
+    </script>
+    <script>
+        const options = {
+            animate: true,
+            patternWidth: 200,
+            patternHeight: 200,
+            grainOpacity: 0.08,
+            grainDensity: 1,
+            grainWidth: 1,
+            grainHeight: 1
+        };
+        grained('#grain-overlay', options);
     </script>
 </body>
 
