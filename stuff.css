@@ -206,11 +206,3 @@ body {
     opacity: 0.8;
     transform: scale(1.7);
 }
-#element-1,
-#element-2,
-#element-3,
-#element-4,
-#element-5,
-#element-6  {
-    transition: top 10s cubic-bezier(0.4, 0.8, 0.2, 1);
-}
