@@ -134,6 +134,14 @@ body {
     box-sizing: border-box;
     
 }
+#grain-overlay {
+    position: fixed;
+    inset: 0;
+
+    /* không chặn click */
+
+    /* hoặc soft-light */
+}
 .stuff-images {
   display: flex;
   flex-wrap: nowrap;
