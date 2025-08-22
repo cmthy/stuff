@@ -42,7 +42,7 @@ sections.forEach((section, index) => {
     index || tween.progress(1); // the first tween should be at its end (already faded/scaled in)
 });
 window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
+  const scrollY = window.scrollX;
   // Rotate element-1 clockwise, element-2 counterclockwise
   const rotation1 = scrollY * 0.3; // adjust multiplier for speed
   const rotation2 = -scrollY * 0.3;
